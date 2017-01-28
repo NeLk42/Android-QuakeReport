@@ -60,14 +60,16 @@ public final class QueryUtils {
                 Double mag = properties.getDouble("mag");
                 Long time = properties.getLong("time");
                 String place = properties.getString("place");
+                String url = properties.getString("url");
 
                 Log.i("QueryUtils", "Creating new Quake - " +
                         "mag " + mag +  ", " +
                         "time " + time +  ", " +
-                        "place " + place +  ", "
+                        "place " + place +  ", " +
+                        "url " + url
                 );
 
-                Earthquake quake = new Earthquake(mag, time, place);
+                Earthquake quake = new Earthquake(mag, time, place, url);
                 earthquakes.add(quake);
             }
 

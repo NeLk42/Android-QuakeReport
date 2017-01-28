@@ -9,6 +9,7 @@ public class Earthquake {
     private Double magnitude;
     private Long time;
     private String place;
+    private String url;
 
     /**
      * Create a new Earthquake object.
@@ -17,10 +18,11 @@ public class Earthquake {
      * @param time represents the time the earthquake happened.
      * @param place represents the location the earthquake occurred.
      */
-    public Earthquake(Double magnitude, Long time, String place){
+    public Earthquake(Double magnitude, Long time, String place, String url){
         this.magnitude = magnitude;
         this.time = time;
         this.place = place;
+        this.url = url;
     }
 
     public Double getMagnitude() {
@@ -33,5 +35,9 @@ public class Earthquake {
 
     public String getPlace() {
         return place;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }
