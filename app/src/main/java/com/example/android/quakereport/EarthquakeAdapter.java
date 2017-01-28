@@ -18,6 +18,8 @@ import java.util.Date;
 
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
 
+    public static final String LOCATION_SEPARATOR = " of ";
+
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
 
@@ -36,12 +38,30 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
 
         Earthquake currentEarthquake = getItem(position);
 
+        String location = currentEarthquake.getPlace();
+        String offsetLocation;
+        String primaryLocation;
+
+        // Set up Locations
+        if(location.contains(LOCATION_SEPARATOR)){
+            String[] parts = location.split(LOCATION_SEPARATOR);
+            offsetLocation = parts[0] = LOCATION_SEPARATOR;
+            primaryLocation = parts[1];
+        } else {
+            offsetLocation = getContext().getString(R.string.near_the);
+            primaryLocation = location;
+        }
+
+        TextView offsetLocationTextView = (TextView) listItemView.findViewById(R.id.offset);
+        offsetLocationTextView.setText(offsetLocation);
+
         TextView locationTextView = (TextView) listItemView.findViewById(R.id.location);
-        locationTextView.setText(currentEarthquake.getPlace());
+        locationTextView.setText(primaryLocation);
 
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
         magnitudeTextView.setText(currentEarthquake.getMagnitude());
 
+        // Set up Dates
         Date dateObject = new Date(currentEarthquake.getTime());
         String dayDisplay = formatDate(dateObject, "MMM DD, yyyy");
         String timeDisplay = formatDate(dateObject, "HH:mm");
