@@ -38,17 +38,38 @@ public final class QueryUtils {
      * parsing a JSON response.
      */
     public static ArrayList<Earthquake> extractEarthquakes() {
+        Log.i("QueryUtils", "Accessing extractQuakes");
 
         // Create an empty ArrayList that we can start adding earthquakes to
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
-
         // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
-        try {
 
-            // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
-            // build up a list of Earthquake objects with the corresponding data.
+        try {
+            Log.i("QueryUtils", "Converting SAMPLE_JSON_RESPONSE String into a JSONObject");
+            JSONObject jsonResponse = new JSONObject(SAMPLE_JSON_RESPONSE);
+
+            Log.i("QueryUtils", "Extracting features JSONArray");
+            JSONArray featuresJSONArray = jsonResponse.optJSONArray("features");
+
+            Log.i("QueryUtils", "QueryUtils.extractQuakes - features length : " + featuresJSONArray.length());
+            for (int i = 0; i <= featuresJSONArray.length(); i++){
+                JSONObject quakeJSON = featuresJSONArray.getJSONObject(i);
+                JSONObject properties = quakeJSON.getJSONObject("properties");
+                String mag = properties.getString("mag");
+                String time = properties.getString("time");
+                String place = properties.getString("place");
+
+                Log.i("QueryUtils", "Creating new Quake - " +
+                        "mag " + mag +  ", " +
+                        "time" + time +  ", " +
+                        "place" + place +  ", "
+                );
+
+                Earthquake quake = new Earthquake(mag, time, place);
+                earthquakes.add(quake);
+            }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
