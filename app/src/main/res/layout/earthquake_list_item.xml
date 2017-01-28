@@ -23,8 +23,15 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:id="@+id/date"
+        android:id="@+id/day"
         android:layout_weight="1"
         tools:text="Dec 2016"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/time"
+        android:layout_weight="1"
+        tools:text="3:00 PM"/>
 
 </LinearLayout>
