@@ -16,6 +16,13 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:id="@+id/offset"
+        android:layout_weight="1"
+        tools:text="Near the"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:id="@+id/location"
         android:layout_weight="1"
         tools:text="London"/>
