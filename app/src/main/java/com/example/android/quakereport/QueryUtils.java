@@ -63,8 +63,8 @@ public final class QueryUtils {
 
                 Log.i("QueryUtils", "Creating new Quake - " +
                         "mag " + mag +  ", " +
-                        "time" + time +  ", " +
-                        "place" + place +  ", "
+                        "time " + time +  ", " +
+                        "place " + place +  ", "
                 );
 
                 Earthquake quake = new Earthquake(mag, time, place);
