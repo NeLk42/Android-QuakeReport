@@ -57,7 +57,7 @@ public final class QueryUtils {
             for (int i = 0; i < featuresJSONArray.length(); i++){
                 JSONObject quakeJSON = featuresJSONArray.getJSONObject(i);
                 JSONObject properties = quakeJSON.getJSONObject("properties");
-                String mag = properties.getString("mag");
+                Double mag = properties.getDouble("mag");
                 Long time = properties.getLong("time");
                 String place = properties.getString("place");
 
