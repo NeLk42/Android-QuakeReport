@@ -1,7 +1,9 @@
 package com.example.android.quakereport;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +62,16 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
         locationTextView.setText(primaryLocation);
 
         // Set up Magnitude
-
         DecimalFormat formatter = new DecimalFormat("0.0");
         String magnitudeTruncated = formatter.format(currentEarthquake.getMagnitude());
 
         TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.magnitude);
         magnitudeTextView.setText(magnitudeTruncated);
+
+        //Set up Magnitude Circle Color
+        GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeTextView.getBackground();
+        int magnitudeColor = getMagnitudeColor(currentEarthquake.getMagnitude());
+        magnitudeCircle.setColor(magnitudeColor);
 
         // Set up Date (Day & Time)
         Date dateObject = new Date(currentEarthquake.getTime());
@@ -79,6 +85,47 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
         timeTextView.setText(timeDisplay);
 
         return listItemView;
+    }
+
+    private int getMagnitudeColor(Double magnitude) {
+        int color;
+        int magFloor = (int) Math.floor(magnitude);
+        switch (magFloor){
+            case 0:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude1);
+                break;
+            case 1:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude1);
+                break;
+            case 2:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude2);
+                break;
+            case 3:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude3);
+                break;
+            case 4:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude4);
+                break;
+            case 5:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude5);
+                break;
+            case 6:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude6);
+                break;
+            case 7:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude7);
+                break;
+            case 8:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude8);
+                break;
+            case 9:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude9);
+                break;
+            default:
+                color = ContextCompat.getColor(getContext(), R.color.magnitude10plus);
+                break;
+        }
+        return color;
     }
 
     private String formatDate(Date dateObject, String pattern) {
