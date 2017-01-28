@@ -54,11 +54,11 @@ public final class QueryUtils {
             JSONArray featuresJSONArray = jsonResponse.optJSONArray("features");
 
             Log.i("QueryUtils", "QueryUtils.extractQuakes - features length : " + featuresJSONArray.length());
-            for (int i = 0; i <= featuresJSONArray.length(); i++){
+            for (int i = 0; i < featuresJSONArray.length(); i++){
                 JSONObject quakeJSON = featuresJSONArray.getJSONObject(i);
                 JSONObject properties = quakeJSON.getJSONObject("properties");
                 String mag = properties.getString("mag");
-                String time = properties.getString("time");
+                Long time = properties.getLong("time");
                 String place = properties.getString("place");
 
                 Log.i("QueryUtils", "Creating new Quake - " +
