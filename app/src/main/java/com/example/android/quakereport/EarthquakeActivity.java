@@ -47,25 +47,29 @@ public class EarthquakeActivity extends AppCompatActivity {
         // Create a new {@link ArrayAdapter} of earthquakes
         final EarthquakeAdapter adapter = new EarthquakeAdapter(this, earthquakes);
 
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
-        earthquakeListView.setAdapter(adapter);
+        if (adapter != null){
+            // Set the adapter on the {@link ListView}
+            // so the list can be populated in the user interface
+            earthquakeListView.setAdapter(adapter);
 
-        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                // Find the current earthquake that was clicked on
-                Earthquake currentQuake = adapter.getItem(position);
+            earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                    // Find the current earthquake that was clicked on
+                    Earthquake currentQuake = adapter.getItem(position);
 
-                // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri quakeUri = Uri.parse(currentQuake.getUrl());
+                    if (currentQuake != null) {
+                        // Convert the String URL into a URI object (to pass into the Intent constructor)
+                        Uri quakeUri = Uri.parse(currentQuake.getUrl());
 
-                // Create a new intent to view the earthquake URI
-                Intent webIntent = new Intent(Intent.ACTION_VIEW, quakeUri);
+                        // Create a new intent to view the earthquake URI
+                        Intent webIntent = new Intent(Intent.ACTION_VIEW, quakeUri);
 
-                // Send the intent to launch a new activity
-                startActivity(webIntent);
-            }
-        });
+                        // Send the intent to launch a new activity
+                        startActivity(webIntent);
+                    }
+                }
+            });
+        }
     }
 }
