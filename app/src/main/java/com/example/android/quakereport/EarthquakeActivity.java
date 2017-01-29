@@ -38,7 +38,7 @@ public class EarthquakeActivity extends AppCompatActivity {
 
         // Create a fake list of earthquake locations.
         ArrayList<Earthquake> earthquakes = new ArrayList<>();
-        Log.i("QuakeActivity", "Comenzando lista de terremotos");
+        Log.i(LOG_TAG, "Start quakes list");
         earthquakes.addAll(QueryUtils.extractEarthquakes());
 
         // Find a reference to the {@link ListView} in the layout

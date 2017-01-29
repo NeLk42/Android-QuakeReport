@@ -22,6 +22,7 @@ import java.util.Date;
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
 
     public static final String LOCATION_SEPARATOR = " of ";
+    public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
     public EarthquakeAdapter(Activity context, ArrayList<Earthquake> earthquakes) {
         super(context, 0, earthquakes);
