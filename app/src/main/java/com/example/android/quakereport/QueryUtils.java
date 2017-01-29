@@ -51,24 +51,26 @@ public final class QueryUtils {
             JSONObject jsonResponse = new JSONObject(SAMPLE_JSON_RESPONSE);
             JSONArray featuresJSONArray = jsonResponse.optJSONArray("features");
 
-            Log.i("QueryUtils", "QueryUtils.extractQuakes - features length : " + featuresJSONArray.length());
-            for (int i = 0; i < featuresJSONArray.length(); i++){
-                JSONObject quakeJSON = featuresJSONArray.getJSONObject(i);
-                JSONObject properties = quakeJSON.getJSONObject("properties");
-                Double mag = properties.getDouble("mag");
-                Long time = properties.getLong("time");
-                String place = properties.getString("place");
-                String url = properties.getString("url");
+            if (featuresJSONArray.length() > 0){
+                Log.i(LOG_TAG, "QueryUtils.extractQuakes - features length : " + featuresJSONArray.length());
+                for (int i = 0; i < featuresJSONArray.length(); i++){
+                    JSONObject quakeJSON = featuresJSONArray.getJSONObject(i);
+                    JSONObject properties = quakeJSON.getJSONObject("properties");
+                    Double mag = properties.getDouble("mag");
+                    Long time = properties.getLong("time");
+                    String place = properties.getString("place");
+                    String url = properties.getString("url");
 
-                Log.i("QueryUtils", "Creating new Quake - " +
-                        "mag " + mag +  ", " +
-                        "time " + time +  ", " +
-                        "place " + place +  ", " +
-                        "url " + url
-                );
+                    Log.i(LOG_TAG, "Creating new Quake - " +
+                            "mag " + mag +  ", " +
+                            "time " + time +  ", " +
+                            "place " + place +  ", " +
+                            "url " + url
+                    );
 
-                Earthquake quake = new Earthquake(mag, time, place, url);
-                earthquakes.add(quake);
+                    Earthquake quake = new Earthquake(mag, time, place, url);
+                    earthquakes.add(quake);
+                }
             }
 
         } catch (JSONException e) {
