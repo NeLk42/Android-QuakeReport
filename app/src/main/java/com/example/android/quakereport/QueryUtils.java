@@ -1,5 +1,6 @@
 package com.example.android.quakereport;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -38,7 +39,7 @@ public final class QueryUtils {
      * Return a list of {@link Earthquake} objects that has been built up from
      * parsing a JSON response.
      */
-    public static ArrayList<Earthquake> extractEarthquakes() {
+    public static ArrayList<Earthquake> extractEarthquakes(JSONObject query) {
         Log.i("QueryUtils", "Accessing extractQuakes");
 
         // Create an empty ArrayList that we can start adding earthquakes to
@@ -48,7 +49,13 @@ public final class QueryUtils {
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
 
         try {
-            JSONObject jsonResponse = new JSONObject(SAMPLE_JSON_RESPONSE);
+            JSONObject jsonResponse;
+
+            if (TextUtils.isEmpty(query.toString())) {
+                jsonResponse = new JSONObject(SAMPLE_JSON_RESPONSE);
+            } else {
+                jsonResponse = query;
+            }
             JSONArray featuresJSONArray = jsonResponse.optJSONArray("features");
 
             if (featuresJSONArray.length() > 0){
