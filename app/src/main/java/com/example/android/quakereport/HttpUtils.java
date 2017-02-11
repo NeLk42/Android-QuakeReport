@@ -21,6 +21,10 @@ public class HttpUtils {
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
+        if (url == null) {
+            return jsonResponse;
+        }
+
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
 
@@ -29,13 +33,21 @@ public class HttpUtils {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            inputStream = urlConnection.getInputStream();
-            jsonResponse = readFromStream(inputStream);
+            if (urlConnection.getResponseCode() == 200) {
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
+            } else {
+                Log.e(LOG_TAG, "" + urlConnection.getResponseCode());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            urlConnection.disconnect();
-            inputStream.close();
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
         }
         return jsonResponse;
     }
@@ -43,12 +55,14 @@ public class HttpUtils {
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder response = new StringBuilder();
 
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
-        BufferedReader reader = new BufferedReader(inputStreamReader);
-        String line = reader.readLine();
-        while (line != null) {
-            response.append(line);
-            line = reader.readLine();
+        if (inputStream != null) {
+            InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
+            while (line != null) {
+                response.append(line);
+                line = reader.readLine();
+            }
         }
 
         return response.toString();
