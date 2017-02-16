@@ -39,9 +39,7 @@ public final class QueryUtils {
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
 
         try {
-            JSONObject jsonResponse = query;
-
-            JSONArray featuresJSONArray = jsonResponse.optJSONArray("features");
+            JSONArray featuresJSONArray = query.optJSONArray("features");
 
             if (featuresJSONArray.length() > 0){
                 Log.i(LOG_TAG, "QueryUtils.extractQuakes - features length : " + featuresJSONArray.length());
