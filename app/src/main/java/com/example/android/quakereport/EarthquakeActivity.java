@@ -81,9 +81,18 @@ public class EarthquakeActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Earthquake> earthquakes) {
-            adapter.addAll(earthquakes);
-//            earthquakesList.addAll(earthquakes);
-//            adapter.notifyDataSetChanged();
+            // Clear the adapter of previous earthquake data
+            adapter.clear();
+
+            // If there is a valid list of {@link Earthquake}s, then add them to the adapter's
+            // data set. This will trigger the ListView to update.
+            if (earthquakes != null && !earthquakes.isEmpty()) {
+                adapter.addAll(earthquakes);
+
+//                # Option 2 : call the adapter.notifyDataSetChanged()
+//                earthquakesList.addAll(earthquakes);
+//                adapter.notifyDataSetChanged();
+            }
         }
     }
 
