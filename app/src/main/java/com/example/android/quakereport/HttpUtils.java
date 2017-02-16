@@ -1,5 +1,6 @@
 package com.example.android.quakereport;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -18,12 +19,15 @@ public class HttpUtils {
 
     public static final String LOG_TAG = HttpUtils.class.getSimpleName();
 
-    private static String makeHttpRequest(URL url) throws IOException {
+    public static String makeHttpRequest(String requestURL) throws IOException {
         String jsonResponse = "";
 
-        if (url == null) {
+        if (TextUtils.isEmpty(requestURL)) {
             return jsonResponse;
         }
+
+        //TODO : Handle MalformedURLException
+        URL url = new URL(requestURL);
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;

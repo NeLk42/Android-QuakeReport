@@ -1,6 +1,5 @@
 package com.example.android.quakereport;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import org.json.JSONArray;
