@@ -76,7 +76,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake>{
 
             // Set up Date (Day & Time)
             Date dateObject = new Date(currentEarthquake.getTime());
-            String dayDisplay = quakeUtils.formatDate(dateObject, "MMM DD, yyyy");
+            String dayDisplay = quakeUtils.formatDate(dateObject, "MMM dd, yyyy");
             String timeDisplay = quakeUtils.formatDate(dateObject, "HH:mm");
 
             TextView dayTextView = (TextView) listItemView.findViewById(R.id.day);
