@@ -1,5 +1,6 @@
 package com.example.android.quakereport;
 
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
@@ -27,7 +29,7 @@ public class HttpUtils {
         }
 
         //TODO : Handle MalformedURLException
-        URL url = new URL(requestURL);
+        URL url = createURL(requestURL);
 
         HttpURLConnection urlConnection = null;
         InputStream inputStream = null;
@@ -44,7 +46,7 @@ public class HttpUtils {
                 Log.e(LOG_TAG, "" + urlConnection.getResponseCode());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e(LOG_TAG, "Problem with IOException" + e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -54,6 +56,17 @@ public class HttpUtils {
             }
         }
         return jsonResponse;
+    }
+
+    @NonNull
+    private static URL createURL(String requestURL) throws MalformedURLException {
+        URL url = null;
+        try {
+            url = new URL(requestURL);
+        } catch (MalformedURLException e) {
+            Log.e(LOG_TAG, "Problem building URL "+ e);
+        }
+        return url;
     }
 
     private static String readFromStream(InputStream inputStream) throws IOException {
