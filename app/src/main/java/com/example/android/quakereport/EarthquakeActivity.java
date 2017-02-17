@@ -69,6 +69,9 @@ public class EarthquakeActivity extends AppCompatActivity {
     private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
         @Override
         protected List<Earthquake> doInBackground(String... urls) {
+            if (urls.length < 1 || urls[0] == null){
+                return null;
+            }
             JSONObject jsonResponse = null;
             // MakeHTTPRequest with given query, assign it to jsonResponse
             try {
