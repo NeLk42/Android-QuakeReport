@@ -43,7 +43,10 @@ public class HttpUtils {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
-                Log.e(LOG_TAG, "" + urlConnection.getResponseCode());
+                Log.e(LOG_TAG, "Response was a : " + urlConnection.getResponseCode());
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = readFromStream(inputStream);
+                Log.e(LOG_TAG, "More info: " + jsonResponse);
             }
         } catch (IOException e) {
             Log.e(LOG_TAG, "Problem with IOException" + e);
