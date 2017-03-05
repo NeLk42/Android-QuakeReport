@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public final class QueryUtils {
 
     public static final String QUERY = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=4&limit=10";
+    public static final String QUERY = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&eventtype=earthquake&orderby=time&minmag=4&limit=10";
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
